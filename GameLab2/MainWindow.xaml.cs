@@ -99,5 +99,18 @@ namespace GameLab2
         }
 
         private void NextEnemy(object sender, RoutedEventArgs e) => SpawnNewEnemy();
+        private void RepeatEnemy(object sender, RoutedEventArgs e)
+        {
+            if (_currentEnemy == null) return;
+
+            _currentEnemy = new Enemy(
+                _currentEnemy.Name,
+                _currentEnemy.MaxHitPoints,
+                _currentEnemy.GoldReward,
+                _currentEnemy.Icon
+            );
+
+            UpdateUI();
+        }
     }
 }
