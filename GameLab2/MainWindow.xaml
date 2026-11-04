@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Верхняя панель: хар-ки игрока -->
+        <!-- Верхняя панель: характеристики игрока -->
         <Border Grid.Row="0" BorderBrush="#DDDDDD" BorderThickness="0,0,0,1" Padding="0,0,0,12">
             <UniformGrid Columns="3">
                 <StackPanel HorizontalAlignment="Left">
@@ -35,7 +35,7 @@
 
         <!-- Центр: враг (картинка слева, информация справа) -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Width="170" Height="170" Background="White" BorderBrush="Black" BorderThickness="1" ToolTip="Click to deal damage">
+            <Button Click="DealDamage" Width="170" Height="170" Background="White" BorderBrush="Black" BorderThickness="1" ToolTip="Click to deal damage">
                 <Image x:Name="EnemyImage" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Uniform" Margin="10"/>
             </Button>
 
