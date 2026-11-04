@@ -41,6 +41,17 @@ namespace GameLab2
             }
         }
 
+        public bool TryUpgrade()
+        {
+            if (TrySpendGold(upgradeCost))
+            {
+                lvl++;
+                RecalculateStats();
+                return true;
+            }
+            return false;
+        }
+
         public BigNumber DealDamage()
         {
             return CalculateTotalDamage();
