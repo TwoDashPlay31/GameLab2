@@ -156,8 +156,54 @@ namespace GameLab2
         }
 
 
+        private BigNumber Multiply(double multiplier)
+        {
+            if (multiplier < 0) throw new ArgumentException("Множитель не должен быть отрицательным.");
+            if (multiplier == 0) return new BigNumber("0");
+
+            double[] intermediate = new double[this.number.Length];
+            double fractionCarry = 0;
+
+            for (int i = 0; i < this.number.Length; i++)
+            {
+                double current = this.number[i] * multiplier + fractionCarry;
+                double blockValue = Math.Floor(current);
+                intermediate[i] = blockValue;
+
+                fractionCarry = Math.Round((current - blockValue) * Base, 2);
+
+                if (fractionCarry >= Base)
+                {
+                    intermediate[i] += Math.Floor(fractionCarry / Base);
+                    fractionCarry %= Base;
+                }
+            }
+            int maxLen = this.number.Length + 5;
+            int[] tempResult = new int[maxLen];
+            int offset = maxLen - this.number.Length;
+            long carry = 0;
+
+            for (int i = this.number.Length - 1; i >= 0; i--)
+            {
+                long total = (long)intermediate[i] + carry;
+                tempResult[offset + i] = (int)(total % Base);
+                carry = total / Base;
+            }
+
+            int k = offset - 1;
+            while (carry > 0 && k >= 0)
+            {
+                tempResult[k--] = (int)(carry % Base);
+                carry /= Base;
+            }
+
+            return new BigNumber(tempResult);
+        }
+
+
         public static BigNumber operator +(BigNumber a, BigNumber b) => a.Add(b);
         public static BigNumber operator -(BigNumber a, BigNumber b) => a.Substruct(b);
+        public static BigNumber operator *(BigNumber a, double b) => a.Multiply(b);
         public static bool operator >(BigNumber a, BigNumber b) => a.CompareTo(b) > 0;
         public static bool operator <(BigNumber a, BigNumber b) => a.CompareTo(b) < 0;
     }
