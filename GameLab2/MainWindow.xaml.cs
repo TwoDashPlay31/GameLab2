@@ -11,7 +11,7 @@ namespace GameLab2
         private EnemyList _enemyStorage;
         private int _defeatedCount = 0;
 
-        string jsonPath = //"C:/Users/";
+        string jsonPath = "C:/Users/lich/Desktop/labs/2 kyrs/code/lab2/enemies.json";
 
         public MainWindow()
         {
@@ -45,6 +45,12 @@ namespace GameLab2
                 SpawnNewEnemy();
             }
 
+            UpdateUI();
+        }
+
+        private void UpgradeClick(object sender, RoutedEventArgs e)
+        {
+            _player.TryUpgrade();
             UpdateUI();
         }
 

@@ -68,7 +68,7 @@
                     <TextBlock x:Name="UpgradeCost" FontSize="14" FontWeight="Bold"/>
                 </StackPanel>
 
-                <Button Grid.Column="1" Content="Upgrade" Width="120" Height="36"/>
+                <Button Click="UpgradeClick" Grid.Column="1" Content="Upgrade" Width="120" Height="36"/>
             </Grid>
         </Border>
     </Grid>
