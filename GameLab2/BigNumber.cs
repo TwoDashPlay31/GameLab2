@@ -99,6 +99,31 @@ namespace GameLab2
         }
 
 
+        private BigNumber Add(BigNumber bnum)
+        {
+            int maxLen = Math.Max(this.number.Length, bnum.number.Length);
+            int[] tempResult = new int[maxLen + 1];
+            int carry = 0;
+
+            int i = this.number.Length - 1;
+            int j = bnum.number.Length - 1;
+            int k = tempResult.Length - 1;
+
+            while (i >= 0 || j >= 0 || carry > 0)
+            {
+                int sum = carry;
+                if (i >= 0) sum += this.number[i--];
+                if (j >= 0) sum += bnum.number[j--];
+
+                tempResult[k--] = sum % Base;
+                carry = sum / Base;
+            }
+
+            return new BigNumber(tempResult);
+        }
+
+
+        public static BigNumber operator +(BigNumber a, BigNumber b) => a.Add(b);
         public static bool operator >(BigNumber a, BigNumber b) => a.CompareTo(b) > 0;
         public static bool operator <(BigNumber a, BigNumber b) => a.CompareTo(b) < 0;
     }
