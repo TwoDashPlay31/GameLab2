@@ -11,7 +11,7 @@ namespace GameLab2
         private EnemyList _enemyStorage;
         private int _defeatedCount = 0;
 
-        string jsonPath = "C:/Users/lich/Desktop/labs/2 kyrs/code/lab2/enemies.json";
+        string jsonPath = //"C:/Users/";
 
         public MainWindow()
         {
@@ -97,5 +97,7 @@ namespace GameLab2
                 }
             }
         }
+
+        private void NextEnemy(object sender, RoutedEventArgs e) => SpawnNewEnemy();
     }
 }
