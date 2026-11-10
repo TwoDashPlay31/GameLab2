@@ -48,6 +48,12 @@ namespace GameLab2
             UpdateUI();
         }
 
+        private void UpgradeClick(object sender, RoutedEventArgs e)
+        {
+            _player.TryUpgrade();
+            UpdateUI();
+        }
+
         private void UpdateUI()
         {
             if (_player == null || _currentEnemy == null) return;
