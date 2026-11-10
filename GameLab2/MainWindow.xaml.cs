@@ -31,6 +31,23 @@ namespace GameLab2
             UpdateUI();
         }
 
+        private void DealDamage(object sender, RoutedEventArgs e)
+        {
+
+            BigNumber damage = _player.DealDamage();
+
+            bool isDead = _currentEnemy.TakeDamage(damage, out BigNumber reward);
+
+            if (isDead)
+            {
+                _player.AddGold(reward);
+                _defeatedCount++; 
+                SpawnNewEnemy();  
+            }
+
+            UpdateUI();
+        }
+
         private void UpdateUI()
         {
             if (_player == null || _currentEnemy == null) return;

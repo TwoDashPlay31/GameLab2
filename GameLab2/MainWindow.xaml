@@ -35,7 +35,7 @@
 
         <!-- Центр: враг (картинка слева, информация справа) -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Width="170" Height="170" Background="White" BorderBrush="Black" BorderThickness="1" ToolTip="Click to deal damage">
+            <Button Click="DealDamage" Width="170" Height="170" Background="White" BorderBrush="Black" BorderThickness="1" ToolTip="Click to deal damage">
                 <Image x:Name="EnemyImage" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Uniform" Margin="10"/>
             </Button>
 
