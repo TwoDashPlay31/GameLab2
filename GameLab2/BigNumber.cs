@@ -201,10 +201,32 @@ namespace GameLab2
         }
 
 
+        private BigNumber Divide(double divisor)
+        {
+            if (divisor <= 0) throw new DivideByZeroException("Деление на ноль или отрицательное число.");
+
+            int[] tempResult = new int[this.number.Length];
+            double remainder = 0;
+
+            for (int i = 0; i < this.number.Length; i++)
+            {
+                double current = remainder * Base + this.number[i];
+                double divResult = current / divisor;
+                tempResult[i] = (int)Math.Floor(divResult);
+
+                remainder = current - (tempResult[i] * divisor);
+            }
+
+            return new BigNumber(tempResult);
+        }
+
+
         public static BigNumber operator +(BigNumber a, BigNumber b) => a.Add(b);
         public static BigNumber operator -(BigNumber a, BigNumber b) => a.Substruct(b);
         public static BigNumber operator *(BigNumber a, double b) => a.Multiply(b);
+        public static BigNumber operator /(BigNumber a, double b) => a.Divide(b);
         public static bool operator >(BigNumber a, BigNumber b) => a.CompareTo(b) > 0;
         public static bool operator <(BigNumber a, BigNumber b) => a.CompareTo(b) < 0;
+
     }
 }
