@@ -83,5 +83,23 @@ namespace GameLab2
             Array.Copy(arr, startIdx, trimmed, 0, trimmed.Length);
             return trimmed;
         }
+
+
+        private int CompareTo(BigNumber bnum)
+        {
+            if (this.number.Length != bnum.number.Length)
+                return this.number.Length.CompareTo(bnum.number.Length);
+
+            for (int i = 0; i < this.number.Length; i++)
+            {
+                if (this.number[i] != bnum.number[i])
+                    return this.number[i].CompareTo(bnum.number[i]);
+            }
+            return 0;
+        }
+
+
+        public static bool operator >(BigNumber a, BigNumber b) => a.CompareTo(b) > 0;
+        public static bool operator <(BigNumber a, BigNumber b) => a.CompareTo(b) < 0;
     }
 }
