@@ -61,5 +61,16 @@ namespace GameLab2
                     templates[i].SpawnChance /= sum;
             }
         }
+
+        private EnemyTemplate FindByChance(double chance)
+        {
+            double sum = 0;
+            for (int i = 0; i < templates.Count; i++)
+            {
+                sum += templates[i].SpawnChance;
+                if (sum >= chance) return templates[i];
+            }
+            return templates.Count > 0 ? templates[0] : null;
+        }
     }
 }
