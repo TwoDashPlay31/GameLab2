@@ -43,6 +43,23 @@ namespace GameLab2
                     templates.Add(template);
                 }
             }
+
+            NormalizeChances();
+        }
+
+        private void NormalizeChances()
+        {
+            if (templates.Count == 0) return;
+
+            double sum = 0;
+            for (int i = 0; i < templates.Count; i++)
+                sum += templates[i].SpawnChance;
+
+            if (sum > 0)
+            {
+                for (int i = 0; i < templates.Count; i++)
+                    templates[i].SpawnChance /= sum;
+            }
         }
     }
 }
