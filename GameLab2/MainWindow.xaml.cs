@@ -44,6 +44,35 @@ namespace GameLab2
             GoldFromenemy.Text = _currentEnemy.GoldReward.ToString();
             UpgradeCost.Text = _player.UpgradeCost.ToString();
 
+
+            if (!string.IsNullOrEmpty(_currentEnemy.Icon))
+            {
+                try
+                {
+                    string cleanPath = _currentEnemy.Icon.Replace("\"", "").Trim();
+
+                    if (System.IO.File.Exists(cleanPath))
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(cleanPath, UriKind.Absolute);
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+
+                        EnemyImage.Source = bitmap;
+                    }
+                    else
+                    {
+                        EnemyName.Text = "Файл картинки не найден по пути!";
+                        EnemyImage.Source = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    EnemyName.Text = $"Ошибка картинки: {ex.Message}";
+                    EnemyImage.Source = null;
+                }
+            }
         }
     }
 }
