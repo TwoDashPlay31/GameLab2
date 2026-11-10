@@ -33,6 +33,14 @@ namespace GameLab2
             RecalculateStats();
         }
 
+        public void AddGold(BigNumber amount)
+        {
+            if (amount != null)
+            {
+                gold = gold + amount; 
+            }
+        }
+
         public BigNumber DealDamage()
         {
             return CalculateTotalDamage();
@@ -66,6 +74,18 @@ namespace GameLab2
                 baseDamage = baseDamage * damageModifier; 
             }
             return baseDamage;
+        }
+
+        private bool TrySpendGold(BigNumber amount)
+        {
+           
+            if (amount > gold)
+            {
+                return false;
+            }
+
+            gold = gold - amount;
+            return true;
         }
     }
 }
