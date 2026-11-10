@@ -33,6 +33,11 @@ namespace GameLab2
             RecalculateStats();
         }
 
+        public BigNumber DealDamage()
+        {
+            return CalculateTotalDamage();
+        }
+
         private void RecalculateStats()
         {
             damage = CalculateTotalDamage();
