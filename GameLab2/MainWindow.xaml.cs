@@ -97,5 +97,7 @@ namespace GameLab2
                 }
             }
         }
+
+        private void NextEnemy(object sender, RoutedEventArgs e) => SpawnNewEnemy();
     }
 }
