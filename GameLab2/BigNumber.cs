@@ -123,7 +123,41 @@ namespace GameLab2
         }
 
 
+        private BigNumber Substruct(BigNumber bnum)
+        {
+            if (this.CompareTo(bnum) < 0)
+                throw new InvalidOperationException("Результат вычитания не может быть отрицательным.");
+
+            int[] tempResult = new int[this.number.Length];
+            int borrow = 0;
+
+            int i = this.number.Length - 1;
+            int j = bnum.number.Length - 1;
+            int k = tempResult.Length - 1;
+
+            while (i >= 0)
+            {
+                int diff = this.number[i--] - borrow;
+                if (j >= 0) diff -= bnum.number[j--];
+                if (diff < 0)
+                {
+                    diff += Base;
+                    borrow = 1;
+                }
+                else
+                {
+                    borrow = 0;
+                }
+
+                tempResult[k--] = diff;
+            }
+
+            return new BigNumber(tempResult);
+        }
+
+
         public static BigNumber operator +(BigNumber a, BigNumber b) => a.Add(b);
+        public static BigNumber operator -(BigNumber a, BigNumber b) => a.Substruct(b);
         public static bool operator >(BigNumber a, BigNumber b) => a.CompareTo(b) > 0;
         public static bool operator <(BigNumber a, BigNumber b) => a.CompareTo(b) < 0;
     }
