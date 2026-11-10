@@ -28,6 +28,32 @@ namespace GameLab2
             this.icon = icon;
             this.isDead = false;
         }
+
+        public bool TakeDamage(BigNumber dmg, out BigNumber reward)
+        {
+            if (isDead)
+            {
+                reward = new BigNumber("0");
+                return false;
+            }
+
+            if (!(currentHitPoints > dmg))
+            {
+                currentHitPoints = new BigNumber("0");
+                Die();
+                reward = goldReward;
+                return true;
+            }
+
+            currentHitPoints = currentHitPoints - dmg;
+            reward = new BigNumber("0");
+            return false;
+        }
+
+        private void Die()
+        {
+            isDead = true;
+        }
     }
 }
 
