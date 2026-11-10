@@ -18,6 +18,7 @@ namespace GameLab2
     class EnemyList
     {
         private List<EnemyTemplate> templates = new List<EnemyTemplate>();
+        private Random rng = new Random();
 
         public void LoadFromJson(string path)
         {
@@ -71,6 +72,27 @@ namespace GameLab2
                 if (sum >= chance) return templates[i];
             }
             return templates.Count > 0 ? templates[0] : null;
+        }
+
+        public Enemy GetNextEnemy(int defeatedCount)
+        {
+            EnemyTemplate template = FindByChance(rng.NextDouble());
+
+            if (template == null)
+            {
+                return new Enemy("Заглушка", new BigNumber("100"), new BigNumber("10"), "default.png");
+            }
+
+            BigNumber hpValue = new BigNumber(template.BaseLife.ToString());
+            BigNumber goldValue = new BigNumber(template.BaseGold.ToString());
+
+            for (int k = 0; k < defeatedCount; k++)
+            {
+                hpValue = hpValue * (1.0 + template.LifeModifier);
+                goldValue = goldValue * (1.0 + template.GoldModifier);
+            }
+
+            return new Enemy(template.Name, hpValue, goldValue, template.IconName);
         }
     }
 }
