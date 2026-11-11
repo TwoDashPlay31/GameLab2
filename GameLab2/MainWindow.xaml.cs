@@ -9,9 +9,9 @@ namespace GameLab2
         private Player _player;
         private Enemy _currentEnemy;
         private EnemyList _enemyStorage;
-        private int _defeatedCount = 0; 
+        private int _defeatedCount = 0;
 
-        string jsonPath = "C:/Users/lich/Desktop/labs/2 kyrs/code/lab2/enemies.json";
+        string jsonPath = Path.Combine(AppContext.BaseDirectory, "icons", "enemies.json");
 
         public MainWindow()
         {
@@ -72,7 +72,10 @@ namespace GameLab2
             {
                 try
                 {
-                    string cleanPath = _currentEnemy.Icon.Replace("\"", "").Trim();
+                    string iconName = _currentEnemy.Icon.Replace("\"", "").Trim();
+                    string cleanPath = System.IO.Path.IsPathRooted(iconName)
+                        ? iconName
+                        : System.IO.Path.Combine(AppContext.BaseDirectory, iconName);
 
                     if (System.IO.File.Exists(cleanPath))
                     {
