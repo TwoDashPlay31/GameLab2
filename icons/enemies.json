@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "skeleton",
+    "IconName": "icons/Monsters/skeleton_1.png",
+    "BaseLife": 100,
+    "LifeModifier": 0.15,
+    "BaseGold": 10,
+    "GoldModifier": 0.1,
+    "SpawnChance": 0.5
+  },
+  {
+    "Name": "гоблин",
+    "IconName": "icons/Monsters/goblin_1.png",
+    "BaseLife": 80,
+    "LifeModifier": 0.1,
+    "BaseGold": 7,
+    "GoldModifier": 0.08,
+    "SpawnChance": 0.5
+  }
+]
